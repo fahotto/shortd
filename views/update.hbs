@@ -1,0 +1,139 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+
+<div class="container text-center m-3">
+    <hr>
+    <i style='font-size:24px' class='fas'>&#xf0fc;</i>
+    <h1>
+       Styles Brewed
+    </h1>
+    <hr>
+</div>
+<table class="table table-striped container" id="table">
+    <thead>
+        <tr>
+        <th scope="col">#</th>
+        <th scope="col">Style</th>
+        <th scope="col">IBUs</th>
+        <th scope="col">Description</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        {{#each datos}}
+        <tr>
+        <th scope="row">{{ idStyle }}</th>
+        <td>{{ nameStyle }}</td>
+        <td>{{ ibusStyle }}</td>
+        <td>{{ descriptionStyle }}</td>
+        <td>
+            <a href="javascript:void(0);" class="btn btn-danger delete" data-id="{{ idStyle}}">Delete</a>
+            <a href="javascript:void(0);" class="btn btn-primary edit" data-id="{{ idStyle }}" data-name= "{{nameStyle}}" data-ibusStyle= "{{ibusStyle}}" data-descriptionStyle= "{{descriptionStyle}}">Update</a>
+            </td>
+        </tr>
+        {{/each}}
+        
+    </tbody>
+</table>
+
+{{! DELETE FORM}}
+<form action="/delete" method="post">
+    <div class="modal" id="DeleteModal" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Eliminar Producto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro de eliminar el Producto?</p>
+            </div>
+            <div class="modal-footer">
+                <input type="number" name="idStyle" id="idStyle" class="idStyle" required>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+{{! UPDATE FORM}}
+<form action="/edit" method="post">
+    <div class="modal fade" id="EditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Producto</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+            <div class="mb-3">
+            <input type="number" name="idStyle" id="idStyle" class="idStyle">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+
+            <div class="mb-3">
+                <label for="nameStyle" class="col-form-label">Style: </label>
+                <input type="text" class="form-control nameStyle" id="nameStyle" name="nameStyle">
+            </div>
+            
+            <div class="mb-3">
+                <label for="ibusStyle" class="col-form-label">IBUS: </label>
+                <input type="number" class="form-control ibusStyle" id="ibusStyle" name="ibusStyle">
+            </div>
+
+            <div class="mb-3">
+                <label for="descriptionStyle" class="col-form-label">Description: </label>
+                <textarea class="form-control descriptionStyle" id="descriptionStyle" name="descriptionStyle"></textarea>
+            </div>
+        </div>
+        
+        </div>
+    </div>
+</div>
+</form>
+
+
+{{! DELETE MODAL}}
+<script>
+    
+    $(document).ready(function() {
+
+        $('#table').on('click', '.delete', function (){
+            let idStyle = $(this).data('idStyle');
+            $('#DeleteModal').modal('show')
+        })
+
+    })
+</script>
+
+{{! EDIT MODAL}}
+<script>
+     $(document).ready(function() {
+
+        $('#table').on('click', '.edit', function (){
+            let idStyle = $(this).data('idStyle');
+            let nameStyle = $(this).data('nameStyle');   
+            let ibusStyle = $(this).data('ibusStyle'); 
+            let descriptionStyle = $(this).data('descriptionStyle');          
+            $('#EditModal').modal('show');
+            $('.idStyle').val(idStyle);
+            $('.nameStyle').val(nameStyle);
+            $('.ibusStyle').val(ibusStyle);
+            $('.descriptionStyle').val(descriptionStyle);
+        })
+
+    })
+    
+</script>
+
+
+
