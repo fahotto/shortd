@@ -75,6 +75,12 @@ app.get('/services', (req, res) => {
 })
 })
 
+app.get('/store', (req, res) => {
+    res.render('store', {
+    titulo: 'From grain, to your house!!'
+  })
+  })
+
 app.get('/contact', (req, res) =>{
   res.render('contact', {
       titulo: 'From grain, to your mail!!'
