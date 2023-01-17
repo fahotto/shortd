@@ -11,4 +11,7 @@ Desde la seccion /contact, se puede introducir nombre y correo electronico para 
 
 Se utilizo HTML, CSS, BOOTSTRAP, HBS, JS, entre otros.
 
+Para ingresar como admin !!!
+(mailAdmin === 'admin@shortd.com' & password === 'dante')
+
 
